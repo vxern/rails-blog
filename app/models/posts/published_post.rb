@@ -1,0 +1,2 @@
+class PublishedPost < Post
+end

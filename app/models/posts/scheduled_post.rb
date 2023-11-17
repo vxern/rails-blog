@@ -1,0 +1,2 @@
+class ScheduledPost < Post
+end

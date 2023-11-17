@@ -1,4 +1,4 @@
-<%= form_with model: post, method: method do |form| %>
+<%= form_with model: @post.becomes(Post) do |form| %>
   <div>
     <%= form.label :title %>
     <%= form.text_field :title %>
@@ -7,6 +7,11 @@
   <div>
     <%= form.label :body %>
     <%= form.text_area :body %>
+  </div>
+
+  <div>
+    <%= form.label :published_at %>
+    <%= form.datetime_select :published_at, include_blank: true %>
   </div>
 
   <% if form.object.errors.any? %>

@@ -1,4 +1,4 @@
 <h1><%= @post.title %></h1>
 <%= @post.body %>
 
-<%= button_to "Edit", edit_post_path, method: :get %>
+<%= button_to "Edit", edit_post_path(@post), method: :get %>

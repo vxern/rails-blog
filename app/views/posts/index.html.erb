@@ -1,13 +1,43 @@
 <h1>My Blog</h1>
 
-<% @posts.each do |post| %>
-  <div>
-    <h2><%= link_to post.title, post %></h2>
-    <%= post.body %>
-  </div>
+<% if @posts.fetch("DraftPosts", false)&.present? %>
+  <h2>Drafts</h2>
+  <% @posts["DraftPosts"].each do |post| %>
+    <div>
+      <h4><%= link_to post.title, post_path(post) %></h4>
+      <%= post.body %>
+    </div>
+  <% end %>
 <% end %>
 
+<% if @posts.fetch("ScheduledPosts", false)&.present? %>
+  <h2>Scheduled</h2>
+  <% @posts["ScheduledPosts"].each do |post| %>
+    <div>
+      <h4><%= link_to post.title, post_path(post) %></h4>
+      <%= post.body %>
+    </div>
+  <% end %>
+<% end %>
+
+<h2>Published</h2>
+<% if @posts.fetch("PublishedPosts", false)&.present? %>
+  <% @posts["PublishedPosts"].each do |post| %>
+    <div>
+      <h4><%= link_to post.title, post_path(post) %></h4>
+      <%= post.body %>
+    </div>
+  <% end %>
+<% else %>
+  <i class="text-gray-300">No publications yet.</i>
+<% end %>
+
+<br>
+<br>
+
 <%= button_to "Create blog post", new_post_path, method: :get %>
+
+<br>
 
 <% if signed_in? %>
   Signed in as: <%= current_user.email %>
