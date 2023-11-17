@@ -28,3 +28,5 @@ group :test do
 end
 
 gem "clearance", "~> 2.6"
+
+gem "tailwindcss-rails", "~> 2.0"
