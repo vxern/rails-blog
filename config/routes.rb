@@ -24,5 +24,5 @@ Rails.application.routes.draw do
   # * Blog
   resources :posts
 
-  get "*path" => redirect("/")
+  get "*segment" => redirect("/"), segment: /(?!rails).*/
 end
