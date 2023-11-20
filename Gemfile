@@ -32,3 +32,5 @@ gem "clearance", "~> 2.6"
 gem "tailwindcss-rails", "~> 2.0"
 
 gem "image_processing", "~> 1.12"
+
+gem "aws-sdk-s3", "~> 1.137", :require => false
