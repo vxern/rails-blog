@@ -19,6 +19,8 @@ class PostsController < ApplicationController
       "PublishedPosts" => pagy(@posts.fetch("PublishedPosts", [].freeze), page_param: :published_page),
       "ScheduledPosts" => pagy(@posts.fetch("ScheduledPosts", [].freeze), page_param: :scheduled_page)
     }
+  rescue Pagy::OverflowError
+    redirect_to posts_path
   end
 
   def show
