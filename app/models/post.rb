@@ -9,11 +9,11 @@ class Post < ApplicationRecord
   def self.get_type(published_at)
     case
     when published_at == nil
-      "DraftPost"
+      DraftPost.class.name
     when published_at <= Time.current
-      "PublishedPost"
+      PublishedPost.class.name
     else
-      "ScheduledPost"
+      ScheduledPost.class.name
     end
   end
 end
