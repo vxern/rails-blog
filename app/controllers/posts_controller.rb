@@ -65,7 +65,7 @@ class PostsController < ApplicationController
   private
 
   def params_sanitised
-    params.require(:post).permit(:title, :body, :published_at)
+    params.require(:post).permit(:title, :content, :published_at)
   end
 
   def parse_published_at(params)

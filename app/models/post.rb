@@ -1,6 +1,8 @@
 class Post < ApplicationRecord
+  has_rich_text :content
+
   validates :title, presence: true
-  validates :body, presence: true
+  validates :content, presence: true
 
   scope :draft, -> { DraftPost.all }
   scope :published, -> { PublishedPost.all }
@@ -9,11 +11,11 @@ class Post < ApplicationRecord
   def self.get_type(published_at)
     case
     when published_at == nil
-      DraftPost.class.name
+      DraftPost.name
     when published_at <= Time.current
-      PublishedPost.class.name
+      PublishedPost.name
     else
-      ScheduledPost.class.name
+      ScheduledPost.name
     end
   end
 end

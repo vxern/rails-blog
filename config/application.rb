@@ -25,5 +25,8 @@ module RailsBlog
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.action_view.sanitized_allowed_tags = %w[img iframe]
+    config.action_view.sanitized_allowed_attributes = %w[src alt data-src data-srcset width height class]
   end
 end
