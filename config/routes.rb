@@ -22,7 +22,9 @@ Rails.application.routes.draw do
   end
 
   # * Blog
-  resources :posts
+  resources :posts do
+    resource :cover_image, only: [:destroy], module: :posts
+  end
 
   get "*segment" => redirect("/"), segment: /(?!rails).*/
 end

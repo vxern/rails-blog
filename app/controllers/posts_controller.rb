@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :require_login, except: [:index, :show]
-  before_action :set_blog_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
     @posts = if signed_in?
@@ -72,14 +72,14 @@ class PostsController < ApplicationController
   private
 
   def params_sanitised
-    params.require(:post).permit(:title, :content, :published_at)
+    params.require(:post).permit(:title, :content, :cover_image, :published_at)
   end
 
   def parse_published_at(params)
     DateTime.new *(1..5).to_a.map { |index| params["published_at(#{index}i)"].to_i } rescue nil
   end
 
-  def set_blog_post
+  def set_post
     @post = signed_in? ? Post.find(params[:id]) : Post.published.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     redirect_to posts_path

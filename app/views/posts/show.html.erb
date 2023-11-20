@@ -1,4 +1,5 @@
-<h1><%= @post.title %></h1>
+<h1 class="my-10"><%= @post.title %></h1>
+<%= image_tag @post.cover_image if @post.cover_image.present? %>
 <%= @post.content %>
 
 <%= button_to "Edit", edit_post_path(@post), method: :get %>
