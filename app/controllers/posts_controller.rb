@@ -14,6 +14,11 @@ class PostsController < ApplicationController
                  "PublishedPosts" => Post.published
                }
              end
+    @pagies = {
+      "DraftPosts" => pagy(@posts.fetch("DraftPosts", [].freeze), page_param: :draft_page),
+      "PublishedPosts" => pagy(@posts.fetch("PublishedPosts", [].freeze), page_param: :published_page),
+      "ScheduledPosts" => pagy(@posts.fetch("ScheduledPosts", [].freeze), page_param: :scheduled_page)
+    }
   end
 
   def show

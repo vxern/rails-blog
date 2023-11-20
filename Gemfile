@@ -34,3 +34,5 @@ gem "tailwindcss-rails", "~> 2.0"
 gem "image_processing", "~> 1.12"
 
 gem "aws-sdk-s3", "~> 1.137", :require => false
+
+gem "pagy", "~> 6.2"

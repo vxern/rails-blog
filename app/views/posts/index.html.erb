@@ -1,39 +1,57 @@
 <h1>My Blog</h1>
 
 <% if @posts.fetch("DraftPosts", false)&.present? %>
-  <h2>Drafts</h2>
-  <% @posts["DraftPosts"].each do |post| %>
-    <div>
-      <h4><%= link_to post.title, post_path(post) %></h4>
-      <%= post.content %>
+  <%= turbo_frame_tag "drafts" do %>
+    <h2>Drafts</h2>
+    <% @pagies["DraftPosts"].at(1).each do |post| %>
+      <div>
+        <h4><%= link_to post.title, post_path(post), target: "_top" %></h4>
+        <%= post.content %>
+      </div>
+    <% end %>
+
+    <div class="my-16">
+    <%= pagy_nav(@pagies.fetch("DraftPosts").at(0)).html_safe %>
     </div>
   <% end %>
 <% end %>
 
 <% if @posts.fetch("ScheduledPosts", false)&.present? %>
-  <h2>Scheduled</h2>
-  <% @posts["ScheduledPosts"].each do |post| %>
-    <div>
-      <h4><%= link_to post.title, post_path(post) %></h4>
-      <%= post.content %>
+  <%= turbo_frame_tag "scheduled" do %>
+    <h2>Scheduled</h2>
+    <% @pagies["ScheduledPosts"].at(1).each do |post| %>
+      <div>
+        <h4><%= link_to post.title, post_path(post), target: "_top" %></h4>
+        <%= post.content %>
+      </div>
+    <% end %>
+
+    <div class="my-16">
+    <%= pagy_nav(@pagies["ScheduledPosts"].at(0)).html_safe %>
     </div>
   <% end %>
 <% end %>
 
 <h2>Published</h2>
 <% if @posts.fetch("PublishedPosts", false)&.present? %>
-  <% @posts["PublishedPosts"].each do |post| %>
-    <div>
-      <h4><%= link_to post.title, post_path(post) %></h4>
-      <%= post.content %>
+  <%= turbo_frame_tag "published" do %>
+    <% @pagies["PublishedPosts"].at(1).each do |post| %>
+      <div>
+        <h4><%= link_to post.title, post_path(post), target: "_top" %></h4>
+        <%= post.content %>
+      </div>
+    <% end %>
+
+    <div class="my-16">
+      <%= pagy_nav(@pagies.fetch("PublishedPosts").at(0)).html_safe %>
     </div>
   <% end %>
 <% else %>
   <i class="text-gray-300">No publications yet.</i>
-<% end %>
 
-<br>
-<br>
+  <br>
+  <br>
+<% end %>
 
 <%= button_to "Create blog post", new_post_path, method: :get %>
 
